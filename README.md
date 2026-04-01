@@ -2,7 +2,7 @@
 
 Web viewer for [LeRobot](https://github.com/huggingface/lerobot) episode data. Shows synchronized multi-camera video feeds alongside time-series plots for joint positions, actions, and base velocity.
 
-![screenshot](https://github.com/user-attachments/assets/placeholder)
+<!-- To add a screenshot: open the viewer, take a screenshot, then edit this README on GitHub and drag the image in -->
 
 ## Features
 
