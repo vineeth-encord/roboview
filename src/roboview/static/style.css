@@ -42,6 +42,22 @@ header h1 {
     color: #666;
 }
 
+#btn-delete {
+    background: transparent;
+    color: #ff4444;
+    border: 1px solid #ff444466;
+    border-radius: 4px;
+    padding: 3px 8px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.15s, border-color 0.15s;
+}
+
+#btn-delete:hover {
+    background: #ff444422;
+    border-color: #ff4444;
+}
+
 select {
     background: #0f1a2e;
     color: #e0e0e0;

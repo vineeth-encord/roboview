@@ -157,6 +157,37 @@ class DatasetReader:
         else:
             return self._flat_video_map.get(episode_index, {})
 
+    def delete_episode(self, episode_index: int) -> bool:
+        """Delete an episode's parquet, video files, and episodes.jsonl entry."""
+        # Delete parquet
+        parquet_path = self._get_parquet_path(episode_index)
+        if parquet_path and os.path.exists(parquet_path):
+            os.remove(parquet_path)
+
+        # Delete video files
+        video_paths = self.get_video_paths_for_episode(episode_index)
+        for path in video_paths.values():
+            if os.path.exists(path):
+                os.remove(path)
+
+        # Remove from flat video map if applicable
+        if not self.is_standard and hasattr(self, "_flat_video_map"):
+            self._flat_video_map.pop(episode_index, None)
+
+        # Remove from episodes list
+        self.episodes = [e for e in self.episodes if e["episode_index"] != episode_index]
+
+        # Rewrite episodes.jsonl
+        for subdir in ["", "meta"]:
+            path = os.path.join(self.dataset_path, subdir, "episodes.jsonl")
+            if os.path.exists(path):
+                with open(path, "w") as f:
+                    for ep in self.episodes:
+                        f.write(json.dumps(ep) + "\n")
+                break
+
+        return True
+
     def get_info_summary(self) -> dict:
         available = self.get_available_episodes()
         return {

@@ -385,7 +385,36 @@ function syncLoop(timestamp) {
     state.animFrameId = requestAnimationFrame(syncLoop);
 }
 
+async function deleteEpisode() {
+    if (state.currentEpisode === null) return;
+    const idx = state.currentEpisode;
+    if (!confirm(`Permanently delete Episode ${idx} and all its files?`)) return;
+
+    const resp = await fetch(`/api/episode/${idx}`, { method: "DELETE" });
+    if (!resp.ok) {
+        alert(`Failed to delete episode: ${resp.statusText}`);
+        return;
+    }
+
+    // Server returns updated info summary
+    state.info = await resp.json();
+    populateEpisodeSelector();
+
+    if (state.info.available_episodes.length > 0) {
+        const nextIdx = state.info.available_episodes[0].episode_index;
+        document.getElementById("episode-select").value = nextIdx;
+        await loadEpisode(nextIdx);
+    } else {
+        state.episodeData = null;
+        state.currentEpisode = null;
+        document.getElementById("video-container").innerHTML = "";
+        document.getElementById("episode-info").textContent = "No episodes available";
+    }
+}
+
 function setupControls() {
+    document.getElementById("btn-delete").addEventListener("click", deleteEpisode);
+
     document.getElementById("btn-play").addEventListener("click", () => {
         if (state.isPlaying) pausePlayback();
         else startPlayback();

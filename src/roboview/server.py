@@ -67,6 +67,17 @@ def get_video(episode_index: int, video_idx: int):
     return FileResponse(filepath, media_type="video/mp4")
 
 
+@app.delete("/api/episode/{episode_index}")
+def delete_episode(episode_index: int):
+    """Delete an episode and all its files from disk."""
+    # Check episode exists
+    available = [e["episode_index"] for e in reader.get_available_episodes()]
+    if episode_index not in available:
+        raise HTTPException(404, f"Episode {episode_index} not found")
+    reader.delete_episode(episode_index)
+    return reader.get_info_summary()
+
+
 @app.get("/")
 def serve_index():
     return FileResponse(_PACKAGE_DIR / "static" / "index.html")
