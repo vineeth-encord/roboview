@@ -1,0 +1,24 @@
+[build-system]
+requires = ["setuptools>=64", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "roboview"
+version = "0.1.0"
+description = "Web viewer for LeRobot episode data with synchronized video and joint plots"
+requires-python = ">=3.9"
+dependencies = [
+    "fastapi>=0.100",
+    "uvicorn[standard]>=0.20",
+    "pandas>=1.5",
+    "pyarrow>=10.0",
+]
+
+[project.scripts]
+roboview = "roboview.server:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+roboview = ["static/**/*"]

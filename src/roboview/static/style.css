@@ -1,0 +1,250 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: #1a1a2e;
+    color: #e0e0e0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    overflow-x: hidden;
+}
+
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 20px;
+    background: #16213e;
+    border-bottom: 1px solid #1a2744;
+}
+
+header h1 {
+    font-size: 18px;
+    font-weight: 600;
+    color: #e0e0e0;
+}
+
+.header-controls {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.header-controls label {
+    font-size: 13px;
+    color: #999;
+}
+
+#episode-info {
+    font-size: 12px;
+    color: #666;
+}
+
+select {
+    background: #0f1a2e;
+    color: #e0e0e0;
+    border: 1px solid #2a3a5c;
+    border-radius: 4px;
+    padding: 4px 8px;
+    font-size: 13px;
+    cursor: pointer;
+}
+
+select:focus {
+    outline: 1px solid #00d4ff;
+}
+
+/* Video section */
+#video-container {
+    display: flex;
+    gap: 4px;
+    padding: 8px;
+    justify-content: center;
+    background: #111827;
+    max-height: 30vh;
+    overflow: hidden;
+}
+
+.video-wrapper {
+    flex: 1;
+    max-width: 33.33%;
+    position: relative;
+    min-width: 0;
+}
+
+.video-label {
+    position: absolute;
+    top: 6px;
+    left: 6px;
+    background: rgba(0, 0, 0, 0.7);
+    color: #00d4ff;
+    padding: 2px 8px;
+    border-radius: 3px;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    z-index: 1;
+}
+
+.video-wrapper video {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+    border-radius: 4px;
+    border: 1px solid #1a2744;
+}
+
+/* Controls */
+#controls {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 8px 16px;
+    background: #16213e;
+    border-top: 1px solid #1a2744;
+    border-bottom: 1px solid #1a2744;
+}
+
+.control-buttons {
+    display: flex;
+    gap: 4px;
+}
+
+.control-buttons button {
+    background: #0f1a2e;
+    color: #e0e0e0;
+    border: 1px solid #2a3a5c;
+    border-radius: 4px;
+    width: 34px;
+    height: 30px;
+    font-size: 14px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.15s;
+}
+
+.control-buttons button:hover {
+    background: #1a2744;
+    border-color: #3a5a8c;
+}
+
+.control-buttons button:active {
+    background: #2a3a5c;
+}
+
+#timeline {
+    flex: 1;
+    height: 6px;
+    -webkit-appearance: none;
+    appearance: none;
+    background: #0f1a2e;
+    border-radius: 3px;
+    outline: none;
+    cursor: pointer;
+}
+
+#timeline::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: #00d4ff;
+    cursor: pointer;
+    border: 2px solid #16213e;
+}
+
+#timeline::-moz-range-thumb {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: #00d4ff;
+    cursor: pointer;
+    border: 2px solid #16213e;
+}
+
+.control-info {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    white-space: nowrap;
+}
+
+.control-info label {
+    font-size: 12px;
+    color: #999;
+}
+
+#frame-display {
+    font-family: "SF Mono", "Fira Code", monospace;
+    font-size: 12px;
+    color: #999;
+    min-width: 140px;
+}
+
+/* Charts */
+#charts {
+    padding: 4px 8px 8px;
+}
+
+.chart-section {
+    margin-bottom: 4px;
+    background: #16213e;
+    border-radius: 4px;
+    border: 1px solid #1a2744;
+}
+
+.chart-section summary {
+    padding: 6px 12px;
+    font-size: 13px;
+    font-weight: 600;
+    color: #ccc;
+    cursor: pointer;
+    user-select: none;
+    list-style: none;
+}
+
+.chart-section summary::-webkit-details-marker {
+    display: none;
+}
+
+.chart-section summary::before {
+    content: "\25B6";
+    display: inline-block;
+    margin-right: 8px;
+    font-size: 10px;
+    color: #00d4ff;
+    transition: transform 0.15s;
+}
+
+.chart-section[open] summary::before {
+    transform: rotate(90deg);
+}
+
+.chart-section summary:hover {
+    color: #fff;
+}
+
+.chart-container {
+    margin-bottom: 0;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+    #video-container {
+        flex-wrap: wrap;
+    }
+    .video-wrapper {
+        max-width: 100%;
+        flex-basis: 100%;
+    }
+    #controls {
+        flex-wrap: wrap;
+    }
+}

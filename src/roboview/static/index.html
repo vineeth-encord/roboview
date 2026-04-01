@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Robotics Data Viewer</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <script src="https://cdn.plot.ly/plotly-2.35.0.min.js"></script>
+</head>
+<body>
+    <header>
+        <h1>Robotics Data Viewer</h1>
+        <div class="header-controls">
+            <label for="episode-select">Episode:</label>
+            <select id="episode-select"></select>
+            <span id="episode-info"></span>
+        </div>
+    </header>
+
+    <div id="video-container"></div>
+
+    <div id="controls">
+        <div class="control-buttons">
+            <button id="btn-first" title="First frame (Home)">&#x23EE;</button>
+            <button id="btn-prev" title="Previous frame (Left)">&#x23EA;</button>
+            <button id="btn-play" title="Play/Pause (Space)">&#x25B6;</button>
+            <button id="btn-next" title="Next frame (Right)">&#x23E9;</button>
+            <button id="btn-last" title="Last frame (End)">&#x23ED;</button>
+        </div>
+        <input type="range" id="timeline" min="0" max="0" value="0" step="1">
+        <div class="control-info">
+            <label for="speed-select">Speed:</label>
+            <select id="speed-select">
+                <option value="0.25">0.25x</option>
+                <option value="0.5">0.5x</option>
+                <option value="1" selected>1x</option>
+                <option value="2">2x</option>
+            </select>
+            <span id="frame-display">Frame: 0 / 0</span>
+        </div>
+    </div>
+
+    <div id="charts">
+        <details class="chart-section" open>
+            <summary>Joint Positions (observed)</summary>
+            <div id="chart-state" class="chart-container"></div>
+        </details>
+        <details class="chart-section" open>
+            <summary>Commanded Actions</summary>
+            <div id="chart-action" class="chart-container"></div>
+        </details>
+        <details class="chart-section">
+            <summary>Base Velocity</summary>
+            <div id="chart-base" class="chart-container"></div>
+        </details>
+    </div>
+
+    <script src="/static/app.js"></script>
+</body>
+</html>

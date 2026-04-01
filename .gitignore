@@ -1,0 +1,10 @@
+.venv/
+__pycache__/
+*.pyc
+*.pem
+*.egg-info/
+build/
+dist/
+sample_data/
+sample_data_structured/
+.claude/
