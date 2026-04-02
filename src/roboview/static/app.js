@@ -412,7 +412,29 @@ async function deleteEpisode() {
     }
 }
 
+async function refreshEpisodes() {
+    const resp = await fetch("/api/refresh", { method: "POST" });
+    state.info = await resp.json();
+    const prevEpisode = state.currentEpisode;
+    populateEpisodeSelector();
+
+    // Stay on current episode if still available, otherwise load first
+    const available = state.info.available_episodes.map(e => e.episode_index);
+    if (available.length === 0) {
+        state.episodeData = null;
+        state.currentEpisode = null;
+        document.getElementById("video-container").innerHTML = "";
+        document.getElementById("episode-info").textContent = "No episodes available";
+        return;
+    }
+
+    const target = available.includes(prevEpisode) ? prevEpisode : available[0];
+    document.getElementById("episode-select").value = target;
+    await loadEpisode(target);
+}
+
 function setupControls() {
+    document.getElementById("btn-refresh").addEventListener("click", refreshEpisodes);
     document.getElementById("btn-delete").addEventListener("click", deleteEpisode);
 
     document.getElementById("btn-play").addEventListener("click", () => {

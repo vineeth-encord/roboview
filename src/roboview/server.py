@@ -29,6 +29,13 @@ def get_info():
     return reader.get_info_summary()
 
 
+@app.post("/api/refresh")
+def refresh():
+    """Rescan the dataset directory for new or removed episodes."""
+    reader.rescan()
+    return reader.get_info_summary()
+
+
 @app.get("/api/episode/{episode_index}")
 def get_episode(episode_index: int):
     data = reader.get_episode_data(episode_index)

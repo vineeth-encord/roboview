@@ -80,6 +80,12 @@ class DatasetReader:
             if mapping:
                 self._flat_video_map[idx] = mapping
 
+    def rescan(self):
+        """Reload episodes from disk to pick up newly added data."""
+        self.episodes = self._load_episodes()
+        if not self.is_standard:
+            self._build_flat_video_map()
+
     def get_available_episodes(self) -> list:
         """Return episodes that have both data and all video files available."""
         num_cameras = len(self.video_keys)

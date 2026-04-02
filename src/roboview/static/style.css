@@ -42,6 +42,22 @@ header h1 {
     color: #666;
 }
 
+#btn-refresh {
+    background: transparent;
+    color: #4fc3f7;
+    border: 1px solid #4fc3f766;
+    border-radius: 4px;
+    padding: 3px 8px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.15s, border-color 0.15s;
+}
+
+#btn-refresh:hover {
+    background: #4fc3f722;
+    border-color: #4fc3f7;
+}
+
 #btn-delete {
     background: transparent;
     color: #ff4444;
